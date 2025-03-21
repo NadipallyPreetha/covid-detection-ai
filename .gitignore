@@ -1,0 +1,10 @@
+# Ignore virtual environment
+venv/
+*.pyc
+__pycache__/
+*.pkl
+*.h5
+*.log
+
+# Ignore large datasets (optional)
+data/
