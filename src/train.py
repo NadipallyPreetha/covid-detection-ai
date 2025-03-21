@@ -1,5 +1,4 @@
-import numpy as np
-import matplotlib.pyplot as plt  # Import for plotting
+import matplotlib.pyplot as plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
@@ -7,7 +6,7 @@ from tensorflow.keras.optimizers import Adam
 def plot_history(history):
     """Plot accuracy and loss over epochs."""
     plt.figure(figsize=(12, 5))
-    
+
     # Plot accuracy
     plt.subplot(1, 2, 1)
     plt.plot(history.history['accuracy'], label='Training Accuracy')
@@ -30,6 +29,15 @@ def plot_history(history):
 
 def train_model(X_train, y_train):
     """Train a CNN model."""
+
+    # ✅ Prevent overflow by converting to float32
+    X_train = X_train.astype('float32')
+    y_train = y_train.astype('float32')
+
+    # ✅ Print the shape of the data to verify correctness
+    print("X_train shape:", X_train.shape)
+    print("y_train shape:", y_train.shape)
+
     model = Sequential([
         Conv2D(32, (3, 3), activation='relu', input_shape=(150, 150, 1)),
         MaxPooling2D((2, 2)),
@@ -52,3 +60,4 @@ def train_model(X_train, y_train):
     plot_history(history)
 
     return model
+
